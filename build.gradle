@@ -27,7 +27,7 @@ dependencies {
 }
 
 shadowJar {
-
+    relocate("me.saiintbrisson", "com.github.eokasta.kotlinplugin.libs.commandframework")
 }
 
 compileKotlin {

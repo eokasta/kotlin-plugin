@@ -12,18 +12,13 @@ class KotlinPlugin : JavaPlugin() {
 
     override fun onEnable() {
         PluginDependencyManager.of(this).downloadAllDependencies().thenRun {
-            var warpManager: WarpManager? = null
-            try {
-                warpManager = WarpManager(this)
-                warpManager.loadWarps()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            val warpManager = WarpManager(this)
+            warpManager.loadWarps()
 
             BukkitFrame(this).also {
                 it.messageHolder.setMessage(MessageType.INCORRECT_USAGE, Helper.format("&c{usage}"))
                 it.registerCommands(
-                        WarpCommand(warpManager!!)
+                        WarpCommand(warpManager)
                 )
             }
 
